@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>LD4L Ontology Modules</title>
+      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+      <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular-sanitize.min.js"></script>
+      <script src="js/d3.min.js"></script>
+      
+      <script src="js/myjs.js"></script>
+      <link rel="stylesheet" href="css/mycss.css">
+   </head>
+   <body>
+      <div ng-app="myApp" ng-controller="myCtrl">
+         <nav class="navbar navbar-inverse">
+            <div class="container-fluid">
+               <div class="navbar-header">
+                  <ul class="nav navbar-nav">
+                     <li><a href="#" ng-click="homePage()">Overview</a></li>
+                     <li><a href="#" ng-click="readJSON()">Ontology Modules</a></li>
+                    <!--  <li><a href="#" ng-click="readPatterns()">Domain-specific Models</a></li> -->
+                  </ul>
+               </div>
+            </div>
+         </nav>
+         <div class="container" style="min-height:600px;margin-top:5em;" ng-show="homepageView">
+            <h1 id="fontstyle">Overview</h1>
+            <p>
+               This bibliographic ontology is based on Rob Sanderson's and LD4L's recommended changes to BIBFRAME to better reflect best practices in the Linked Data domain. It is LD4L’s hope that derivations from BIBFRAME found in this ontology will be folded into the official BIBFRAME namespace. Efforts have been made to consider each class and property, but this ontology is largely untested. LD4L may provide revised/expanded versions in future as we identify new use cases and begin to test the ontology with instance data. The proposed changes include, but are not limited to, incorporation of the following principles and conventions: (1) Reuse stable pre-existing classes and properties from external ontologies rather than declaring new ones within the BIBFRAME namespace. (2) Use URIs rather than strings to identify resources. (3) Replace the bf:Authority classes with Real World Entity classes for people, places, things, etc. (4) Define only one pattern to model one feature of the knowledge domain. (5) Clarify the directionality of properties via naming, definitions, and, where applicable, domain and range constraints, and add inverse properties where appropriate. (6) Name terms consistently and make the distinction between classes, object properties, and datatype properties clear through standard naming conventions. See http://ld4l.org/ontology/ for more on the LD4L Ontology development process.
+            </p>
+            <p>
+               A high-level schematic representation of the proposed LD4L ontology is shown below, with detailed discussion following.
+            </p>
+            <img id="ld4limage" src="data/ld4lonto.png" width="70%">
+               
+            <hr/>
+            <p style="margin-top:2em;">
+             <a href="http://www.duraspace.org/"><img src="data/ld4l.png" height="100"></a>
+              <a href="https://www.ld4l.org/ld4l-labs/"><img style="margin-left:10em; margin-top:1em;" src="data/ld4llabs.png" height="100"></a>
+              <!--  <a href="http://www.openrif.org"><img style="margin-left:15em; margin-top:1em;" src="data/openrif.png" height="60" width="300"></a> -->
+            </p>
+         </div>
+         <div class="container" style="min-height:600px;margin-top:5em;" ng-show="designView">
+            <a name="top"></a>
+            <div class="container">
+               <h4 id="fontstyle"> Namespaces: </h4>
+               <span style="margin-right:1.25em; display:inline-block; text-transform: uppercase;" ng-repeat="ontology in ontologies">
+                  <a href="#{{ontology.code}}">{{ontology.code}}</a>
+               </spn>
+            </div>
+            <hr/>
+            <div class="container" ng-repeat="ontology in ontologies">
+               <div id="{{ontology.code}}" class="panel panel-info" ng-show="ontology.classes.length>0 || ontology.objProperties.length>0 || ontology.dataProperties.length>0 || ontology.annotProperties.length>0 || ontology.individuals.length>0">
+                  <div class="panel-heading">
+                     <h2>{{ontology.ontologyName}}</h2>
+                  </div>
+                  <div class="panel-body">
+                     <table class="table">
+                        <tbody>
+                           <tr>
+                              <td>Ontology Name</td>
+                              <td>{{ontology.ontologyName}} ({{ontology.code}})</td>
+                           </tr>
+                           <tr>
+                              <td>Namespace</td>
+                              <td>{{ontology.namespace}}</td>
+                           </tr>
+                           <tr>
+                              <td>Ontology Version</td>
+                              <td>{{ontology.ontologyVersion}}</td>
+                           </tr>
+                        </tbody>
+                     </table>
+                     <div style="margin-right:1.25em; display:inline-block;" class="text-justify" ng-show="ontology.classes.length>0">
+                        <div>
+                           <h4 id="fontstyle">Classes ({{ontology.classes.length}})</h4>
+                        </div>
+                        <span style="margin-right:1.25em; display:inline-block;" ng-repeat="cls in ontology.classes" data-toggle="tooltip" title="{{cls.uri}}">
+                        <a href="{{cls.link}}" target="_blank">{{cls.label}}</a>
+                        </span> 
+                     </div>
+                     <br>
+                     <div style="margin-right:1.25em; margin-top:1.25em; display:inline-block;" class="text-justify" ng-show="ontology.objProperties.length>0">
+                        <div>
+                           <h4 id="fontstyle">Object Properties ({{ontology.objProperties.length}})</h4>
+                        </div>
+                        <span style="margin-right:1.25em; display:inline-block;" ng-repeat="objProp in ontology.objProperties" data-toggle="tooltip" title="{{objProp.uri}}">
+                        <a href="{{objProp.link}}" target="_blank">{{objProp.label}}</a>
+                        </span>
+                     </div>
+                     <br>
+                     <div style="margin-right:1.25em; margin-top:1.25em; isplay:inline-block;" class="text-justify" ng-show="ontology.dataProperties.length>0">
+                        <div>
+                           <h4 id="fontstyle">Datatype Properties ({{ontology.dataProperties.length}})</h4>
+                        </div>
+                        <span style="margin-right:1.25em; display:inline-block;" ng-repeat="dataProp in ontology.dataProperties" data-toggle="tooltip" title="{{dataProp.uri}}">
+                        <a href="{{dataProp.link}}" target="_blank">{{dataProp.label}}</a>
+                        </span>
+                        <br>
+                     </div>
+                     <div style="margin-right:1.25em; margin-top:1.25em; display:inline-block;" class="text-justify" ng-show="ontology.annotProperties.length>0">
+                        <div>
+                           <h4 id="fontstyle">Annotation Properties ({{ontology.annotProperties.length}})</h4>
+                        </div>
+                        <span style="margin-right:1.25em; display:inline-block;" ng-repeat="annotProp in ontology.annotProperties" data-toggle="tooltip" title="{{annotProp.uri}}">
+                        <a href="{{annotProp.link}}" target="_blank">{{annotProp.label}}</a>
+                        </span>
+                        <br>
+                     </div>
+                     <div style="margin-right:1.25em; margin-top:1.25em; display:inline-block;" class="text-justify" ng-show="ontology.individuals.length>0">
+                        <div>
+                           <h4 id="fontstyle">Instances ({{ontology.individuals.length}})</h4>
+                           <div>
+                              <span style="margin-right:1.25em; display:inline-block;" ng-repeat="indv in ontology.individuals" data-toggle="tooltip" title="{{indv.uri}}">
+                              <a href="{{indv.link}}" target="_blank">{{indv.label}}</a>
+                              </span>
+                              <br>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+                  <div style="text-align: right;"><a href="#top" style="margin-right:1em;">Back to top</a></div>
+               </div>
+            </div>
+         </div>
+          <div class="container" style="min-height:600px;margin-top:5em;" ng-show="patternView">
+            <a name="topmodel"></a>
+            <div class="container">
+               <span style="margin-right:1.25em; display:inline-block; text-transform: uppercase;" ng-repeat="model in models">
+                  <a href="#{{model.modelTitle}}">{{model.modelTitle}} Model</a>
+               </spn>
+            </div>
+            <hr/>
+            <div class="container" ng-repeat="model in models">
+               <div id="{{model.modelTitle}}" class="panel panel-info">
+                  <div class="panel-heading">
+                     <h2>{{model.modelTitle}} Model</h2>
+                  </div>
+                  <div class="panel-body">
+                     <div style="margin-top:1em;">
+                        <h3 id="fontstyle">Description</h3>
+                        <p ng-bind-html="model.modelDescription"></p>
+                     </div>
+                     <div style="margin-top:2em;">
+                        <h3 id="fontstyle">Graph View</h3>
+                        <img id="over" src="data/{{model.image}}" width="80%"></img>
+                     </div>
+                     <div style="margin-top:2em;">
+                        <h3 id="fontstyle">Entities Involved</h3>
+                        Ontologies: [<span style="margin-left:1em; margin-right:1em;" ng-repeat="dept in model.depenOnt">{{dept}}</span>]
+                        <table class="table" style="margin-top:3em;">
+                           <tbody>
+                              <tr>
+                                 <td>Name</td>
+                                 <td>Type</td>
+                                 <td>IRI</td>
+                                 <td>Ontology</td>
+                              </tr>
+                              <tr ng-repeat="entity in model.entities | orderBy : ['ontology', 'type']">
+                                 <td>{{entity.fragment}}</td>
+                                 <td>{{entity.type}}</td>
+                                 <td>{{entity.iri}}</td>
+                                 <td>{{entity.ontology}}</td>
+                              </tr>
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+                  <div style="text-align: right;"><a href="#topmodel" style="margin-right:1em;">Back to top</a></div>
+               </div>
+            </div>
+
+         </div>
+         <div id="footer" style="margin-top:10em;">
+            <div class="container">
+               <p class="muted credit">
+                  <font style="font-style: italic; font-family: Times New Roman, Times, serif;" color="#808080">Created by 
+                  <a href="http://orcid.org/0000-0001-9770-7640" target="_blank">Muhammad Javed</a>. 
+                  last modified on Feb 19, 2017.
+                  </font>
+               </p>
+            </div>
+         </div>
+      </div>
+      <script>
+         $(document).ready(function(){
+           $('[data-toggle="tooltip"]').tooltip();   
+         });
+      </script>
+   </body>
+</html>
