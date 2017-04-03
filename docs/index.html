@@ -55,7 +55,7 @@
             </div>
             <hr/>
             <div class="container" ng-repeat="ontology in ontologies">
-               <div id="{{ontology.code}}" class="panel panel-info" ng-show="ontology.classes.length>0 || ontology.objProperties.length>0 || ontology.dataProperties.length>0 || ontology.annotProperties.length>0 || ontology.individuals.length>0">
+               <div id="{{ontology.code}}" class="panel panel-info" ng-show="ontology.classes.length>0 || ontology.objProperties.length>0 || ontology.rdfsClasses.length>0 || ontology.rdfProperties.length>0 || ontology.dataProperties.length>0 || ontology.annotProperties.length>0 || ontology.individuals.length>0">
                   <div class="panel-heading">
                      <h2>{{ontology.ontologyName}}</h2>
                   </div>
@@ -82,6 +82,24 @@
                         </div>
                         <span style="margin-right:1.25em; display:inline-block;" ng-repeat="cls in ontology.classes" data-toggle="tooltip" title="{{cls.uri}}">
                         <a href="{{cls.link}}" target="_blank">{{cls.label}}</a>
+                        </span> 
+                     </div>
+                     <br>
+                     <div style="margin-right:1.25em; display:inline-block;" class="text-justify" ng-show="ontology.rdfsClasses.length>0">
+                        <div>
+                           <h4 id="fontstyle">RDFS Classes ({{ontology.rdfsClasses.length}})</h4>
+                        </div>
+                        <span style="margin-right:1.25em; display:inline-block;" ng-repeat="rdfscls in ontology.rdfsClasses" data-toggle="tooltip" title="{{rdfscls.uri}}">
+                        <a href="{{rdfscls.link}}" target="_blank">{{rdfscls.label}}</a>
+                        </span> 
+                     </div>
+                     <br>
+                     <div style="margin-right:1.25em; display:inline-block;" class="text-justify" ng-show="ontology.rdfProperties.length>0">
+                        <div>
+                           <h4 id="fontstyle">RDF Properties ({{ontology.rdfProperties.length}})</h4>
+                        </div>
+                        <span style="margin-right:1.25em; display:inline-block;" ng-repeat="rdfprop in ontology.rdfProperties" data-toggle="tooltip" title="{{rdfprop.uri}}">
+                        <a href="{{rdfprop.link}}" target="_blank">{{rdfprop.label}}</a>
                         </span> 
                      </div>
                      <br>
