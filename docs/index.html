@@ -76,6 +76,7 @@
                            </tr>
                         </tbody>
                      </table>
+                     
                      <div style="margin-right:1.25em; display:inline-block;" class="text-justify" ng-show="ontology.classes.length>0">
                         <div>
                            <h4 id="fontstyle">Classes ({{ontology.classes.length}})</h4>
@@ -83,8 +84,9 @@
                         <span style="margin-right:1.25em; display:inline-block;" ng-repeat="cls in ontology.classes" data-toggle="tooltip" title="{{cls.uri}}">
                         <a href="{{cls.link}}" target="_blank">{{cls.label}}</a>
                         </span> 
+                        <br>
                      </div>
-                     <br>
+                     
                      <div style="margin-right:1.25em; display:inline-block;" class="text-justify" ng-show="ontology.rdfsClasses.length>0">
                         <div>
                            <h4 id="fontstyle">RDFS Classes ({{ontology.rdfsClasses.length}})</h4>
@@ -92,8 +94,9 @@
                         <span style="margin-right:1.25em; display:inline-block;" ng-repeat="rdfscls in ontology.rdfsClasses" data-toggle="tooltip" title="{{rdfscls.uri}}">
                         <a href="{{rdfscls.link}}" target="_blank">{{rdfscls.label}}</a>
                         </span> 
+                        <br>
                      </div>
-                     <br>
+                     
                      <div style="margin-right:1.25em; display:inline-block;" class="text-justify" ng-show="ontology.rdfProperties.length>0">
                         <div>
                            <h4 id="fontstyle">RDF Properties ({{ontology.rdfProperties.length}})</h4>
@@ -101,8 +104,9 @@
                         <span style="margin-right:1.25em; display:inline-block;" ng-repeat="rdfprop in ontology.rdfProperties" data-toggle="tooltip" title="{{rdfprop.uri}}">
                         <a href="{{rdfprop.link}}" target="_blank">{{rdfprop.label}}</a>
                         </span> 
+                        <br>
                      </div>
-                     <br>
+                     
                      <div style="margin-right:1.25em; margin-top:1.25em; display:inline-block;" class="text-justify" ng-show="ontology.objProperties.length>0">
                         <div>
                            <h4 id="fontstyle">Object Properties ({{ontology.objProperties.length}})</h4>
@@ -110,8 +114,9 @@
                         <span style="margin-right:1.25em; display:inline-block;" ng-repeat="objProp in ontology.objProperties" data-toggle="tooltip" title="{{objProp.uri}}">
                         <a href="{{objProp.link}}" target="_blank">{{objProp.label}}</a>
                         </span>
+                        <br>
                      </div>
-                     <br>
+                     
                      <div style="margin-right:1.25em; margin-top:1.25em; isplay:inline-block;" class="text-justify" ng-show="ontology.dataProperties.length>0">
                         <div>
                            <h4 id="fontstyle">Datatype Properties ({{ontology.dataProperties.length}})</h4>
