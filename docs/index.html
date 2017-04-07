@@ -48,10 +48,15 @@
          <div class="container" style="min-height:600px;margin-top:5em;" ng-show="designView">
             <a name="top"></a>
             <div class="container">
-               <h4 id="fontstyle"> Namespaces: </h4>
-               <span style="margin-right:1.25em; display:inline-block; text-transform: uppercase;" ng-repeat="ontology in ontologies">
-                  <a href="#{{ontology.code}}">{{ontology.code}}</a>
-               </spn>
+               <h1 id="fontstyle">Ontology Modules</h1>
+                 <p>Ontology modules list consists of the ontology modules that are extracted from the external upstream ontologies (such as FOAF, SKOS, DC Terms, VIVO-CORE etc.).</p>
+               <div style="margin-right:1.25em; display:inline-block;">
+                  <ul>
+                     <li ng-repeat="ontology in ontologies">
+                        <a href="#{{ontology.code}}"> {{ontology.ontologyName}} Module ({{ontology.code}})</a>
+                     </li>
+                  </ul>
+               </div>
             </div>
             <hr/>
             <div class="container" ng-repeat="ontology in ontologies">
