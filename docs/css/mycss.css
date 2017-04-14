@@ -39,3 +39,7 @@ table tr:nth-child(even) {
   display: block;
   border: 5;
 }
+
+#imagemodal{
+  min-width: 100%;
+}
