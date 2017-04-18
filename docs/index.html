@@ -75,14 +75,14 @@
                <div style="margin-right:1.25em; display:inline-block;">
                   <ul>
                      <li ng-repeat="ontology in ontologies">
-                        <a href="#{{ontology.code}}"> {{ontology.ontologyName}} Module ({{ontology.code}})</a>
+                        <a href="#{{ontology.prefix}}"> {{ontology.ontologyName}} Module ({{ontology.prefix}})</a>
                      </li>
                   </ul>
                </div>
             </div>
             <hr/>
             <div class="container" ng-repeat="ontology in ontologies">
-               <div id="{{ontology.code}}" class="panel panel-info" ng-show="ontology.classes.length>0 || ontology.objProperties.length>0 || ontology.rdfsClasses.length>0 || ontology.rdfProperties.length>0 || ontology.dataProperties.length>0 || ontology.annotProperties.length>0 || ontology.individuals.length>0">
+               <div id="{{ontology.prefix}}" class="panel panel-info" ng-show="ontology.classes.length>0 || ontology.objProperties.length>0 || ontology.rdfsClasses.length>0 || ontology.rdfProperties.length>0 || ontology.dataProperties.length>0 || ontology.annotProperties.length>0 || ontology.individuals.length>0">
                   <div class="panel-heading">
                      <h2>{{ontology.ontologyName}}</h2>
                   </div>
@@ -91,7 +91,7 @@
                         <tbody>
                            <tr>
                               <td>Ontology Name</td>
-                              <td>{{ontology.ontologyName}} ({{ontology.code}})</td>
+                              <td>{{ontology.ontologyName}} ({{ontology.prefix}})</td>
                            </tr>
                            <tr>
                               <td>Namespace</td>
